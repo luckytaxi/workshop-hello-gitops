@@ -8,4 +8,4 @@ namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: luckytaxi/hello-gitops
-  newTag: c2ee3406efda31d03e863f91b5bd4260c86ea4bf
+  newTag: 4971609aee8abb9f8738f23f5a7b01579f28a579
