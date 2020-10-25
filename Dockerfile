@@ -1,15 +1,11 @@
-FROM node:13.6.0-alpine
+FROM golang:1.14 as build
+WORKDIR /build
+COPY . .
+RUN CGO_ENABLED=0 go build -o hello-gitops cmd/main.go
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+FROM alpine:3.12
+EXPOSE 8080
 
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install
-
-# Bundle app source
-COPY . /usr/src/app
-
-USER node
-CMD [ "npm", "start" ]
+WORKDIR /app
+COPY --from=build /build/hello-gitops .
+CMD ["./hello-gitops"]
